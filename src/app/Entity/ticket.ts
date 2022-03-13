@@ -25,8 +25,8 @@ export interface Ticket{
     pinCode : number
     issuingAuthority : string
     reason : string
-    amount : Number
-    timePeriod : Number
-    paid : Boolean
+    amount : number
+    timePeriod : number
+    paid : boolean
     
 }
