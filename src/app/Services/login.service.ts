@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { LoggedInUser } from '../Entity/logged-in-user';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment.prod';
 
 
@@ -15,8 +15,6 @@ export interface AuthResponseData {
   jti: string;
 }
 
-
-
 @Injectable({
   providedIn: 'root'
 })
@@ -24,7 +22,7 @@ export class LoginService {
 
   private token: string = ''
 
-  private authority: string = ''
+  authority = new  BehaviorSubject<string>('')
 
   private tokenExpirationTimer: any
   currentUser = new Subject<LoggedInUser>();
@@ -44,24 +42,19 @@ export class LoginService {
     }).subscribe(response => {
       this.token = response.access_token
       this.getLoginAuthority(userName).subscribe(authority => {
-        this.authority = authority
+        this.authority.next(authority)
         const expires_in = new Date(new Date().getTime() + + response.expires_in * 1000);
         const user = new LoggedInUser(userName, response.access_token, expires_in, authority);
         this.currentUser.next(user);
+        console.log(authority)
         this.autoLogout(+response.expires_in * 1000)
         localStorage.setItem('userAuth', JSON.stringify(user))
-        // if (authority === 'DOCTOR') {
-        //   this.getDetailsDoctor(userName).subscribe(newResponse => {
-        //     this.doctorDetail.next(newResponse)
-        //   })
-        //   this.router.navigateByUrl("/home")
-        // }
-        // if (authority === 'PATIENT') {
-        //   this.getDetailsPatient(userName).subscribe(newResponse => {
-        //     this.patientDetail.next(newResponse)
-        //   })
-        //   this.router.navigateByUrl("/patient")
-        // }
+        if (authority === 'AUTHORITY') {
+          this.router.navigateByUrl("/authority")
+        }
+        if (authority === 'ADMIN') {
+          this.router.navigateByUrl("/admin")
+        }
 
       })
     }, error => {
@@ -75,10 +68,6 @@ export class LoginService {
 
   getToken(): string {
     return this.token
-  }
-
-  getAuthority(): string {
-    return this.authority
   }
 
   // checkDetail(userName: string, doctorId: string) {
@@ -104,23 +93,18 @@ export class LoginService {
       } = JSON.parse(localStorage.getItem('userAuth')!)
       const LoggedIn = new LoggedInUser(tempUser.userName, tempUser._token, new Date(tempUser._expirationDate), tempUser._authorizationType)
       if (LoggedIn.token) {
-        this.authority = LoggedIn.authorizationType
+        this.authority.next(LoggedIn.authorizationType)
         const remainingDuration = new Date(tempUser._expirationDate).getTime() - new Date().getTime()
         this.autoLogout(remainingDuration)
         this.currentUser.next(LoggedIn)
         this.token = LoggedIn.token
-        // if (LoggedIn.authorizationType === 'DOCTOR') {
-        //   this.getDetailsDoctor(tempUser.userName).subscribe(newResponse => {
-        //     this.doctorDetail.next(newResponse)
-        //   })
-        //   this.router.navigateByUrl("/home")
-        // }
-        // if (LoggedIn.authorizationType === 'PATIENT') {
-        //   this.getDetailsPatient(tempUser.userName).subscribe(newResponse => {
-        //     this.patientDetail.next(newResponse)
-        //   })
-        //   this.router.navigateByUrl("/patient")
-        // }
+        if (LoggedIn.authorizationType === 'AUTHORITY') {
+          console.log("Initial Redirecting")
+           this.router.navigateByUrl("/authority")
+        }
+        if (LoggedIn.authorizationType === 'ADMIN') {
+          this.router.navigateByUrl("/admin")
+        }
       }
       else
         return;

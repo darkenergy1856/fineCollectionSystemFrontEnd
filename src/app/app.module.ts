@@ -10,13 +10,14 @@ import { AuthorityComponent } from './authority/authority.component';
 import { AdminComponent } from './admin/admin.component';
 import { PublicAccessComponent } from './public-access/public-access.component';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './Services/authGuard.service';
 
 
-const appRoutes : Routes = [
-  {path : '' , component : PublicAccessComponent } ,
-  {path : 'login' , component : LoginComponent },
-  {path : 'admin' , component :AdminComponent},
-  {path : 'authority' , component : AuthorityComponent}
+const appRoutes: Routes = [
+  { path: '', component: PublicAccessComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'admin', component: AdminComponent },
+  { path: 'authority', component: AuthorityComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({
