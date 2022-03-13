@@ -16,13 +16,13 @@
 
 export interface Ticket{
 
-    id : Number
+    id : number
     name : string
     emailId : string
-    phoneNumber : Number
+    phoneNumber : number
     actualDate : string
     state : string
-    pinCode : Number
+    pinCode : number
     issuingAuthority : string
     reason : string
     amount : Number

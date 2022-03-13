@@ -9,7 +9,7 @@
 */
 
 export interface userDetail{
-    id : Number
+    id : number
     name  : string
     department : string
     post : string

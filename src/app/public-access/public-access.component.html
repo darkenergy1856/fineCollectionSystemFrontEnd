@@ -1,1 +1,30 @@
-<p>public-access works!</p>
+<div class="row" style="padding-top: 10%; padding-left: 35%;">
+    <div class="col-xs-12 col-6 col-md-offset-3">
+        <form (ngSubmit)="search(ticketForm)" #ticketForm="ngForm">
+            <div class="mb-3">
+                <label for="ticket" class="form-label">Search Ticket</label>
+                <input type="email" class="form-control" ngModel name="ticket" id="ticket" aria-describedby="emailHelp" placeholder="Fill this to Continue...." required>
+                <div id="emailHelp" class="form-text">Select the Search criteria from below</div>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" ngModel type="radio" name="SearchCriteria" value = "1">
+                <label class="form-check-label">
+                  Ticket ID
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input"  ngModel name="SearchCriteria"  value= "2" type="radio" required>
+                <label class="form-check-label">
+                  Phone Number
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input"  ngModel name="SearchCriteria"  value= "3" type="radio">
+                <label class="form-check-label">
+                  Email ID
+                </label>
+              </div>
+            <button type="submit" class="btn btn-primary" style="margin-top: 10px;" [disabled]="!ticketForm.valid">Find</button>
+        </form>
+    </div>
+</div>
