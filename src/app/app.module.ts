@@ -10,14 +10,17 @@ import { AuthorityComponent } from './authority/authority.component';
 import { AdminComponent } from './admin/admin.component';
 import { PublicAccessComponent } from './public-access/public-access.component';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from './Services/authGuard.service';
+import { authGuardAuthority } from './Services/authGuardAuthority.service';
+import { HomeComponent } from './home/home.component';
+import { authGuardAdmin } from './Services/authGuardAdmin.service';
 
 
 const appRoutes: Routes = [
-  { path: '', component: PublicAccessComponent },
+  { path: '', component: HomeComponent },
+  {path : 'ticket' , component: PublicAccessComponent},
   { path: 'login', component: LoginComponent },
-  { path: 'admin', component: AdminComponent },
-  { path: 'authority', component: AuthorityComponent, canActivate: [AuthGuard] }
+  { path: 'admin', component: AdminComponent , canActivate : [authGuardAdmin] },
+  { path: 'authority', component: AuthorityComponent, canActivate: [authGuardAuthority] }
 ];
 
 @NgModule({
@@ -26,7 +29,8 @@ const appRoutes: Routes = [
     LoginComponent,
     AuthorityComponent,
     AdminComponent,
-    PublicAccessComponent
+    PublicAccessComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

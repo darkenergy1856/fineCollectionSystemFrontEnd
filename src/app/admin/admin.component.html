@@ -1,1 +1,78 @@
-<p>admin works!</p>
+<nav class="navbar navbar-dark head">
+  <div class="container-fluid">
+    <div class="column">
+      <div class="row">
+        <div class="navbar-brand mb-0 h1">Welcome : {{user.name}}</div>
+        <div class="navbar-brand mb-0 h1">Departement : {{ user.department }}</div>
+      </div>
+      <div class="navbar-brand mb-0 h5">Access Type : Admin</div>
+    </div>
+    <div class="d-flex">
+      <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-dark" type="submit"><span class="material-icons md-18">
+            Search
+          </span></button>
+      </form>
+
+      <button class="btn btn-danger" (click)="onLogOut()" style="margin-left: 10px;">
+        <span class="material-icons md-18">
+          Logout
+        </span></button>
+    </div>
+  </div>
+</nav>
+<div class="mb-3 row" style="margin: auto; margin-top: 20px;">
+  <h2>Create New Account </h2>
+  <form (ngSubmit)="createAuthority(signUpForm)" #signUpForm="ngForm">
+    <div class="form-group">
+      <label class="col-form-label col-sm-2" for="name">Name : </label>
+      <input type="text" required ngModel name="name" id="name">
+    </div>
+    <div class="form-group">
+      <label class="col-form-label col-sm-2" for="departement">Departement : </label>
+      <input type="text" required ngModel name="departement" id="departement">
+    </div>
+    <div class="form-group">
+      <label class="col-form-label col-sm-2" for="post">Post : </label>
+      <input type="text" required ngModel name="post" id="post">
+    </div>
+    <div class="form-group">
+      <label class="col-form-label col-sm-2">Email ID : </label>
+      <input type="text" required ngModel name="userName" placeholder="User Name">
+    </div>
+    <div class="form-group">
+      <label class="col-form-label col-sm-2">Phone Number : </label>
+      <input type="Number" required ngModel name="phoneNumber">
+    </div>
+    <div class="form-group">
+      <label class="col-form-label col-sm-2">Unique Employee ID : </label>
+      <input type="text" required ngModel name="employeeNumber">
+    </div>
+    <div class="form-group">
+      <label class="col-form-label col-sm-2">Password : </label>
+      <input type="text" required ngModel name="password">
+    </div>
+    <div class="form-group">
+      <label class="col-form-label col-sm-2">Confirm Password : </label>
+      <input type="password" required ngModel name="confirmPassword">
+    </div>
+    <h5>Account Access Type</h5>
+    <div class="form-check">
+      <input class="form-check-input" ngModel name="searchCriteria" value="1" type="radio" required>
+      <label class="form-check-label">
+        Admin Account
+      </label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" ngModel name="searchCriteria" value="2" type="radio">
+      <label class="form-check-label">
+        Authority Account
+      </label>
+    </div>
+    <div class="button-group">
+      <button type="submit" class="btn btn-primary" style="margin-top: 3%; margin-left: 10%;">Create User </button>
+      <button type="reset" class="btn btn-secondary" style="margin-top: 3%; margin-left: 2%;">Reset</button>
+    </div>
+  </form>
+</div>

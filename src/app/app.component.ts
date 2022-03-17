@@ -11,5 +11,5 @@ export class AppComponent implements OnInit{
   ngOnInit(): void {
     this.loginService.autoLogin()
   }
-  title = 'fineCollectionSystem';
+  title = 'Fine Collection';
 }

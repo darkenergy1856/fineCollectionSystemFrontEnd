@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { LoggedInUser } from '../Entity/logged-in-user';
+import { userDetail } from '../Entity/userDetail';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment.prod';
 
@@ -22,10 +23,25 @@ export class LoginService {
 
   private token: string = ''
 
-  authority = new  BehaviorSubject<string>('')
+  authority = new BehaviorSubject<string>('')
 
   private tokenExpirationTimer: any
-  currentUser = new Subject<LoggedInUser>();
+
+  emptyLoggedInUser: LoggedInUser = new LoggedInUser('', '', new Date, '')
+
+  currentUser = new BehaviorSubject<LoggedInUser>(this.emptyLoggedInUser);
+
+  emptyUserDetail: userDetail = {
+    id: 0,
+    name: '',
+    department: '',
+    post: '',
+    userName: '',
+    phoneNumber: '',
+    employeeNumber: ''
+  }
+
+  userDetail = new BehaviorSubject<userDetail>(this.emptyUserDetail)
 
   constructor(private httpClient: HttpClient, private router: Router) { }
 
@@ -43,10 +59,12 @@ export class LoginService {
       this.token = response.access_token
       this.getLoginAuthority(userName).subscribe(authority => {
         this.authority.next(authority)
-        const expires_in = new Date(new Date().getTime() + + response.expires_in * 1000);
-        const user = new LoggedInUser(userName, response.access_token, expires_in, authority);
-        this.currentUser.next(user);
-        console.log(authority)
+        const expires_in = new Date(new Date().getTime() + + response.expires_in * 1000)
+        const user = new LoggedInUser(userName, response.access_token, expires_in, authority)
+        this.currentUser.next(user)
+        this.getUserDetail(userName).subscribe(res => {
+          this.userDetail.next(res)
+        })
         this.autoLogout(+response.expires_in * 1000)
         localStorage.setItem('userAuth', JSON.stringify(user))
         if (authority === 'AUTHORITY') {
@@ -70,18 +88,9 @@ export class LoginService {
     return this.token
   }
 
-  // checkDetail(userName: string, doctorId: string) {
-  //   return this.httpClient.get<boolean>(environment.baseUrl + 'doctorService/checkDoctor', { headers: { 'userName': userName, 'doctorId': doctorId } })
-  // }
-
-  // private getDetailsDoctor(userName: string) {
-  //   return this.httpClient.get<Doctor>(environment.baseUrl + 'doctorService/detail?userName=' + userName)
-  // }
-
-  // private getDetailsPatient(userName: string) {
-  //   return this.httpClient.get<Patient>(environment.baseUrl + 'patientService/patientDetail?userName=' + userName)
-  // }
-
+  private getUserDetail(userName: string) {
+    return this.httpClient.get<userDetail>(environment.baseUrl + "user/getDetail?userName=" + userName)
+  }
 
   autoLogin() {
     if (localStorage.getItem('userAuth') != null) {
@@ -97,10 +106,13 @@ export class LoginService {
         const remainingDuration = new Date(tempUser._expirationDate).getTime() - new Date().getTime()
         this.autoLogout(remainingDuration)
         this.currentUser.next(LoggedIn)
+        this.getUserDetail(tempUser.userName).subscribe(res => {
+          this.userDetail.next(res)
+        })
         this.token = LoggedIn.token
         if (LoggedIn.authorizationType === 'AUTHORITY') {
           console.log("Initial Redirecting")
-           this.router.navigateByUrl("/authority")
+          this.router.navigateByUrl("/authority")
         }
         if (LoggedIn.authorizationType === 'ADMIN') {
           this.router.navigateByUrl("/admin")
@@ -111,7 +123,7 @@ export class LoginService {
     }
   }
 
-  
+
   autoLogout(expirationTime: number) {
     this.tokenExpirationTimer = setTimeout(() => {
       this.logOut()

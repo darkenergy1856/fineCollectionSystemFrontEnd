@@ -9,14 +9,13 @@
     private string issuingAuthority;
     private string reason;
     private int amount;
-    private int timePeriod;
+    private string dueDate;
     private boolean paid;
  */
 
-
 export interface Ticket{
 
-    id : number
+    id ?: number
     name : string
     emailId : string
     phoneNumber : number
@@ -26,7 +25,7 @@ export interface Ticket{
     issuingAuthority : string
     reason : string
     amount : number
-    timePeriod : number
+    dueDate : string
     paid : boolean
     
 }

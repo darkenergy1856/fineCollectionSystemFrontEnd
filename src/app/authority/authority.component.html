@@ -1,1 +1,67 @@
-<p>authority works!</p>
+<nav class="navbar navbar-dark head">
+  <div class="container-fluid">
+    <div class="column">
+      <div class="row">
+        <div class="navbar-brand mb-0 h1">Welcome : {{user.name}}</div>
+        <div class="navbar-brand mb-0 h1">Departement : {{ user.department }}</div>
+      </div>
+      <div class="navbar-brand mb-0 h5">Access Type : Authority</div>
+    </div>
+    <div class="d-flex">
+      <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-dark" type="submit"><span class="material-icons md-18">
+            search
+          </span></button>
+      </form>
+
+      <button class="btn btn-danger" (click)="onLogOut()" style="margin-left: 10px;">
+        <span class="material-icons md-18">
+          logout
+        </span></button>
+    </div>
+  </div>
+</nav>
+<div class="col-4 col-md-offset-3" style="margin:1%;">
+<form (ngSubmit)="createTicket(createTicketForm)" #createTicketForm="ngForm">
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input type="text" id="Name" class="form-control" ngModel name="name" required>
+  </div>
+  <div class="form-group">
+    <label for="emailID">Email ID</label>
+    <input type="email" id="emailID" class="form-control" ngModel name="email" required>
+  </div>
+  <div class="form-group">
+    <label for="itemIdentification">Item Identification Number</label>
+    <input type="string" id="itemIdentification" class="form-control" ngModel name="itemIdentification" required>
+  </div>
+  <div class="form-group">
+    <label for="phoneNumber">Phone Number</label>
+    <input type="number" id="phoneNumber" class="form-control" ngModel name="phoneNumber" required>
+  </div>
+  <div class="form-group">
+    <label for="state">State</label>
+    <input type="string" id="state" class="form-control" ngModel name="state" required>
+  </div>
+  <div class="form-group">
+    <label for="pinCode">Pin Code</label>
+    <input type="number" id="pinCode" class="form-control" ngModel name="pinCode" required>
+  </div>
+  <div class="form-group">
+    <label for="reason">Reason</label>
+    <input type="string" id="reason" class="form-control" ngModel name="reason" required>
+  </div>
+  <div class="form-group">
+    <label for="amount">Amount</label>
+    <input type="number" id="amount" class="form-control" ngModel name="amount" required>
+  </div>
+  <div class="form-group">
+    <label for="timePeriod">Time Period</label>
+    <input type="number" id="timePeriod" class="form-control" ngModel name="timePeriod" required>
+  </div>
+  <div style="margin-top: 10px;">
+    <button class="btn btn-primary" type="submit" style="margin-right: 10px;">Create</button>
+  </div>
+</form>
+</div>

@@ -15,4 +15,5 @@ export class LoggedInUser {
     get authorizationType(): string{
         return this._authorizationType
     }
+
 }

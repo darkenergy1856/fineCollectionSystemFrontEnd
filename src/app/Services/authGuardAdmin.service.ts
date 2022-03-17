@@ -6,7 +6,7 @@ import { LoginService } from './login.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate, OnInit, OnDestroy {
+export class authGuardAdmin implements CanActivate, OnInit, OnDestroy {
 
   private loginAuthority: Subscription = new Subscription;
 
@@ -22,7 +22,7 @@ export class AuthGuard implements CanActivate, OnInit, OnDestroy {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
 
-    if (this.loginService.getToken() && (this.accessType === 'AUTHORITY')) {
+    if (this.loginService.getToken() && (this.accessType === 'ADMIN')) {
       return true
     } else {
       return this.router.createUrlTree(['/login'])
