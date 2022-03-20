@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { Ticket } from '../Entity/ticket';
 import { TicketStatusService } from '../Services/ticket-status.service';
@@ -13,8 +13,8 @@ import { TicketStatusService } from '../Services/ticket-status.service';
 })
 export class TicketStatusComponent implements OnInit {
 
-  ticket : Ticket = {
-    id : 0,
+  ticket: Ticket = {
+    id: 0,
     name: '',
     emailId: '',
     phoneNumber: 0,
@@ -26,25 +26,31 @@ export class TicketStatusComponent implements OnInit {
     amount: 0,
     dueDate: ''
   }
-      
-  ticketPaid: boolean = false
-  ticketId : string = ''
 
-  constructor(private activatedRoute: ActivatedRoute, private ticketStatusService: TicketStatusService) {}
+  ticketPaid: boolean = false
+  ticketId: string = ''
+
+  constructor(private activatedRoute: ActivatedRoute, private ticketStatusService: TicketStatusService, private router: Router) { }
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe(param => {
-      this.ticketStatusService.getTicketStatus(param.get('ticketId')!).subscribe(res=>{
-        this.ticket = res
-        this.ticketId = param.get('ticketId')!
-        this.ticketPaid = this.ticket.paid!
+      this.ticketStatusService.getTicketStatus(param.get('ticketId')!).subscribe(res => {
+        if (res == null) {
+          confirm("Invalid Search criteria...")
+          this.router.navigateByUrl("/ticket")
+        } else {
+          this.ticket = res
+          this.ticketId = param.get('ticketId')!
+          this.ticketPaid = this.ticket.paid!
+        }
       })
     })
   }
 
-  payTicket(){
-    this.ticketStatusService.payTicket(this.ticketId).subscribe(res=>{
+  payTicket() {
+    this.ticketStatusService.payTicket(this.ticketId).subscribe(res => {
       confirm(res)
+      this.ticketPaid = true
     })
   }
 

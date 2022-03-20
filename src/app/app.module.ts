@@ -14,15 +14,18 @@ import { authGuardAuthority } from './Services/authGuardAuthority.service';
 import { HomeComponent } from './home/home.component';
 import { authGuardAdmin } from './Services/authGuardAdmin.service';
 import { TicketStatusComponent } from './ticket-status/ticket-status.component';
+import { WildRouteComponent } from './wild-route/wild-route.component';
+import {MatIconModule} from '@angular/material/icon';
 
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
-  {path : 'ticket' , component: PublicAccessComponent},
+  { path: 'ticket', component: PublicAccessComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'admin', component: AdminComponent , canActivate : [authGuardAdmin] },
+  { path: 'admin', component: AdminComponent, canActivate: [authGuardAdmin] },
   { path: 'authority', component: AuthorityComponent, canActivate: [authGuardAuthority] },
-  {path : "ticketStatus/:ticketId" , component : TicketStatusComponent}
+  { path: "ticketStatus/:ticketId", component: TicketStatusComponent },
+  { path: '**', component: WildRouteComponent }
 ];
 
 @NgModule({
@@ -33,7 +36,8 @@ const appRoutes: Routes = [
     AdminComponent,
     PublicAccessComponent,
     HomeComponent,
-    TicketStatusComponent
+    TicketStatusComponent,
+    WildRouteComponent
   ],
   imports: [
     BrowserModule,
@@ -41,6 +45,7 @@ const appRoutes: Routes = [
     FormsModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
+    MatIconModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
