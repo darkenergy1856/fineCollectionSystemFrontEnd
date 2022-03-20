@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { userDetail } from '../Entity/userDetail';
 import { Ticket } from '../Entity/ticket';
 import { LoginService } from '../Services/login.service';
+import { AuthorityService } from '../Services/authority.service';
 
 @Component({
   selector: 'app-authority',
@@ -12,7 +13,7 @@ import { LoginService } from '../Services/login.service';
 export class AuthorityComponent implements OnInit, OnDestroy {
   user !: userDetail
 
-  constructor(private loginService: LoginService) { }
+  constructor(private loginService: LoginService , private authorityService : AuthorityService) { }
 
 
   ngOnInit(): void {
@@ -39,14 +40,16 @@ export class AuthorityComponent implements OnInit, OnDestroy {
       emailId: form.value.email,
       phoneNumber: form.value.phoneNumber,
       actualDate: date.toString(),
-      state: form.value.state,
       pinCode: form.value.pinCode,
       issuingAuthority: this.user.department,
       reason: form.value.reason,
       amount: form.value.amount,
-      paid: false,
+      itemIdentification: form.value.itemIdentification,
       dueDate: temp
     }
+    this.authorityService.generateTicket(ticket).subscribe(res=>{
+      confirm(res)
+    })
   }
 
   onLogOut() {

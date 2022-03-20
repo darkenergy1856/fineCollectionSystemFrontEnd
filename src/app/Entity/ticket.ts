@@ -4,7 +4,6 @@
     private string emailId;
     private Long phoneNumber;
     private string actualDate;
-    private string state;
     private int pinCode;
     private string issuingAuthority;
     private string reason;
@@ -20,12 +19,12 @@ export interface Ticket{
     emailId : string
     phoneNumber : number
     actualDate : string
-    state : string
     pinCode : number
     issuingAuthority : string
+    itemIdentification : string
     reason : string
     amount : number
     dueDate : string
-    paid : boolean
+    paid ?: boolean
     
 }

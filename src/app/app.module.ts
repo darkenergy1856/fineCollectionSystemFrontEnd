@@ -13,6 +13,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { authGuardAuthority } from './Services/authGuardAuthority.service';
 import { HomeComponent } from './home/home.component';
 import { authGuardAdmin } from './Services/authGuardAdmin.service';
+import { TicketStatusComponent } from './ticket-status/ticket-status.component';
 
 
 const appRoutes: Routes = [
@@ -20,7 +21,8 @@ const appRoutes: Routes = [
   {path : 'ticket' , component: PublicAccessComponent},
   { path: 'login', component: LoginComponent },
   { path: 'admin', component: AdminComponent , canActivate : [authGuardAdmin] },
-  { path: 'authority', component: AuthorityComponent, canActivate: [authGuardAuthority] }
+  { path: 'authority', component: AuthorityComponent, canActivate: [authGuardAuthority] },
+  {path : "ticketStatus/:ticketId" , component : TicketStatusComponent}
 ];
 
 @NgModule({
@@ -30,7 +32,8 @@ const appRoutes: Routes = [
     AuthorityComponent,
     AdminComponent,
     PublicAccessComponent,
-    HomeComponent
+    HomeComponent,
+    TicketStatusComponent
   ],
   imports: [
     BrowserModule,

@@ -41,10 +41,6 @@
     <input type="number" id="phoneNumber" class="form-control" ngModel name="phoneNumber" required>
   </div>
   <div class="form-group">
-    <label for="state">State</label>
-    <input type="string" id="state" class="form-control" ngModel name="state" required>
-  </div>
-  <div class="form-group">
     <label for="pinCode">Pin Code</label>
     <input type="number" id="pinCode" class="form-control" ngModel name="pinCode" required>
   </div>
@@ -61,7 +57,7 @@
     <input type="number" id="timePeriod" class="form-control" ngModel name="timePeriod" required>
   </div>
   <div style="margin-top: 10px;">
-    <button class="btn btn-primary" type="submit" style="margin-right: 10px;">Create</button>
+    <button class="btn btn-primary" type="submit" style="margin-right: 10px;"[disabled]="!createTicketForm.valid">Create</button>
   </div>
 </form>
 </div>

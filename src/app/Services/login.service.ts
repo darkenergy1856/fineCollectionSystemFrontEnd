@@ -111,7 +111,6 @@ export class LoginService {
         })
         this.token = LoggedIn.token
         if (LoggedIn.authorizationType === 'AUTHORITY') {
-          console.log("Initial Redirecting")
           this.router.navigateByUrl("/authority")
         }
         if (LoggedIn.authorizationType === 'ADMIN') {
