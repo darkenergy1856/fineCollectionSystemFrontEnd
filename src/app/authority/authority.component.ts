@@ -13,8 +13,7 @@ import { AuthorityService } from '../Services/authority.service';
 export class AuthorityComponent implements OnInit, OnDestroy {
   user !: userDetail
 
-  constructor(private loginService: LoginService , private authorityService : AuthorityService) { }
-
+  constructor(private loginService: LoginService , private authorityService : AuthorityService) {}
 
   ngOnInit(): void {
     this.loginService.userDetail.subscribe(res => {

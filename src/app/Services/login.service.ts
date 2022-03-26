@@ -64,7 +64,7 @@ export class LoginService {
         this.currentUser.next(user)
         this.getUserDetail(userName).subscribe(res => {
           this.userDetail.next(res)
-        })
+        },(error)=>{console.log(error)} , ()=>{        })
         this.autoLogout(+response.expires_in * 1000)
         localStorage.setItem('userAuth', JSON.stringify(user))
         if (authority === 'AUTHORITY') {
@@ -73,7 +73,6 @@ export class LoginService {
         if (authority === 'ADMIN') {
           this.router.navigateByUrl("/admin")
         }
-
       })
     }, error => {
       alert(error.error.error_description)
