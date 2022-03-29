@@ -2,11 +2,34 @@
     /* background-image: linear-gradient(90deg, rgb(68, 144, 190),rgb(251, 254, 241));*/
     background-image: linear-gradient(45deg, rgb(43, 33, 93),rgb(81, 240, 237));
 }
-    
-.btn_css{
-    background-image: linear-gradient(90deg, rgb(160, 222, 219),rgb(3, 165, 209));
+
+
+
+  #form-container{
+      width: 40%;
+      margin: auto;
+      /* display: flex; */
+      /* justify-content: center; */
+  }
+
+.form-group{
+    margin: 10px 0;
+    border-radius: 10px;
 }
 
-.pull-right {
-    float: right !important;
-  }
+.button-group button{
+    width: 25%;
+    height: auto;
+}
+
+/* Blah */
+nav{
+    position: relative;
+}
+
+#welcome{
+    position: absolute;
+    left:50%;
+    transform: translate(-50%);
+    font-weight: bold;
+}

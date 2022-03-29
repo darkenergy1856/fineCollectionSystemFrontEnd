@@ -1,4 +1,4 @@
-import { Component, OnInit , ViewEncapsulation  } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from '../Services/login.service'
@@ -13,7 +13,6 @@ interface user {
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  encapsulation: ViewEncapsulation.None
 })
 
 export class LoginComponent implements OnInit {

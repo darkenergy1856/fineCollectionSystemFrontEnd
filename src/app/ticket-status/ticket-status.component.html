@@ -1,13 +1,14 @@
 <div *ngIf="ticketPaid ; else elseBlock">
-    <div class="container">
+    <div class="container mt-5">
         <div class='row justify-content-center'>
             <div class="col-auto">
-                <img src="../../assets/success-green-check-mark.svg" class="img-fluid" alt="..."
-                    style="width: 50%; margin-top: 4%;">
                 <h3> Ticket Status : Paid </h3>
                 <div class="card" style="width: 25rem;">
-                    <div class="card-header">
-                        <b>Ticket ID :</b> {{ticket.id}}
+                    <div class="card-header d-flex align-items-center justify-content-between">
+                        <div>
+                            <b>Ticket ID :</b> {{ticket.id}}
+                        </div>
+                        <img src="../../assets/success-green-check-mark.svg" style="height: 20px;" alt="...">
                     </div>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item"><b>Name : </b>{{ticket.name}}</li>
@@ -27,9 +28,9 @@
     </div>
 </div>
 <ng-template #elseBlock>
-    <div class="container">
+    <div class="container mt-5">
         <div class='row justify-content-center'>
-            <div class="col-auto" style="margin-top: 10%;">
+            <div class="col-auto">
                 <h3> Ticket Status : Not Paid </h3>
                 <div class="card" style="width: 25rem;">
                     <div class="card-header">
@@ -56,7 +57,7 @@
                         <b>Ticket</b> having ID <b>{{ticket.id}} </b>
                     </label>
                 </div>
-                <div>
+                <div class="text-center mt-3">
                     <button class="btn btn-success" style="margin-top: 10px;" (click)="payTicket()" id="payButton">Pay
                         Ticket</button>
                 </div>

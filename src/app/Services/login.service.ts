@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { LoggedInUser } from '../Entity/logged-in-user';
 import { userDetail } from '../Entity/userDetail';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { BehaviorSubject} from 'rxjs';
 import { environment } from 'src/environments/environment.prod';
 
 

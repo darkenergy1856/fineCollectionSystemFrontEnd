@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { isEmpty } from 'rxjs';
 import { Ticket } from '../Entity/ticket';
 import { PublicAccessService } from '../Services/public-access.service';
 
