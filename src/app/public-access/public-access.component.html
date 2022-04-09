@@ -29,7 +29,28 @@
             <button type="submit" class="btn btn-primary" style="margin-top: 10px;" [disabled]="!ticketForm.valid">Find</button>
         </form>
         <div id="table">
-          sjbjabic 
+          <table class="table table-striped table-hover">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Date</th>
+                <th scope="col">Item No.</th>
+                <th scope="col">Amount</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let ticket of ticket">
+              <tr>
+                <th scope="row">{{ticket.id}}</th>
+                <td>{{ticket.name}}</td>
+                <td>{{ticket.actualDate}}</td>
+                <td>{{ticket.itemIdentification}}</td>
+                <td>{{ticket.amount}}</td>
+                <td><button class="btn btn_css" (click)="checkStatus(ticket.id!)">View</button></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
     </div>
 </div>

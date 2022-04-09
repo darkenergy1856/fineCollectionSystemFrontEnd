@@ -1,59 +1,44 @@
 <nav class="navbar navbar-dark head">
-  <div class="container-fluid">
-    <div class="column">
-      <div class="row">
-        <div class="navbar-brand mb-0 h1">Welcome : {{user.name}}</div>
-        <div class="navbar-brand mb-0 h1">Departement : {{ user.department }}</div>
-      </div>
-      <div class="navbar-brand mb-0 h5">Access Type : Authority</div>
+  <div class="d-flex w-100 justify-content-between align-items-center">
+    <div class="d-flex flex-column mx-4">
+      <div class="navbar-brand w-auto">Departement : {{ user.department }}</div>
+      <div class="navbar-brand w-auto">Access Type : Authority</div>
     </div>
-    <div class="d-flex">
-      <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-dark" type="submit"><span class="material-icons md-18">
-            search
-          </span></button>
-      </form>
-
-      <button class="btn btn-danger" (click)="onLogOut()" style="margin-left: 10px;">
-        <span class="material-icons md-18">
-          logout
-        </span></button>
-    </div>
+  
+    <button class="btn btn-danger mx-4" (click)="onLogOut()" style="margin-left: 10px;">
+      <span class="material-icons md-18">
+        logout
+      </span>
+    </button>
+  </div>
+  <div id="welcome" >
+    <div class="navbar-brand">Welcome {{user.name}}</div>
   </div>
 </nav>
 <div class="d-flex justify-content-center" style="margin:1%;">
   <form class="w-25" (ngSubmit)="createTicket(createTicketForm)" #createTicketForm="ngForm">
     <div class="form-group" class="my-4">
-      <!-- <label for="name">Name</label> -->
       <input type="text" id="Name" placeholder="Name" class="form-control" ngModel name="name" required>
     </div>
     <div class="form-group" class="my-4">
-      <!-- <label for="emailID">Email ID</label> -->
       <input type="email" placeholder = "Email" id="emailID" class="form-control" ngModel name="email" required>
     </div>
     <div class="form-group" class="my-4">
-      <!-- <label for="itemIdentification">Item Identification Number</label> -->
       <input type="string" placeholder = "Item Identification Number" id="itemIdentification" class="form-control" ngModel name="itemIdentification" required>
     </div>
     <div class="form-group" class="my-4">
-      <!-- <label for="phoneNumber">Phone Number</label> -->
       <input type="number" placeholder = "Phone Number" id="phoneNumber" class="form-control" ngModel name="phoneNumber" required>
     </div>
     <div class="form-group" class="my-4">
-      <!-- <label for="pinCode">Pin Code</label> -->
       <input type="number" placeholder = "Pincode" id="pinCode" class="form-control" ngModel name="pinCode" required>
     </div>
     <div class="form-group" class="my-4">
-      <!-- <label for="reason">Reason</label> -->
       <input type="string" placeholder = "Reason" id="reason" class="form-control" ngModel name="reason" required>
     </div>
     <div class="form-group" class="my-4">
-      <!-- <label for="amount">Amount</label> -->
       <input type="number" placeholder = "Amount" id="amount" class="form-control" ngModel name="amount" required>
     </div>
     <div class="form-group" class="my-4">
-      <!-- <label for="timePeriod">Time Period</label> -->
       <input type="number" placeholder = "Time Period" id="timePeriod" class="form-control" ngModel name="timePeriod" required>
     </div>
     <div style="margin-top: 10px; text-align: center;">

@@ -1,5 +1,4 @@
 .head{
-    /* background-image: linear-gradient(90deg, rgb(68, 144, 190),rgb(251, 254, 241));*/
     background-image: linear-gradient(45deg, rgb(43, 33, 93),rgb(81, 240, 237));
 }
 
@@ -8,8 +7,6 @@
   #form-container{
       width: 40%;
       margin: auto;
-      /* display: flex; */
-      /* justify-content: center; */
   }
 
 .form-group{
@@ -22,7 +19,6 @@
     height: auto;
 }
 
-/* Blah */
 nav{
     position: relative;
 }

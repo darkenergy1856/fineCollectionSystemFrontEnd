@@ -11,11 +11,12 @@ import { LoginService } from '../Services/login.service';
 })
 export class AdminComponent implements OnInit, OnDestroy {
   user !: userDetail
+  subscription : any
 
   constructor(private loginService: LoginService, private adminService: AdminService) { }
 
   ngOnInit(): void {
-    this.loginService.userDetail.subscribe(res => {
+    this.subscription = this.loginService.userDetail.subscribe(res => {
       this.user = res
     })
   }
@@ -40,7 +41,7 @@ export class AdminComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.loginService.userDetail.unsubscribe()
+    this.subscription.unsubscribe()
   }
 
 }

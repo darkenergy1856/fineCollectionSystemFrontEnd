@@ -4,6 +4,7 @@ import { userDetail } from '../Entity/userDetail';
 import { Ticket } from '../Entity/ticket';
 import { LoginService } from '../Services/login.service';
 import { AuthorityService } from '../Services/authority.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-authority',
@@ -12,11 +13,13 @@ import { AuthorityService } from '../Services/authority.service';
 })
 export class AuthorityComponent implements OnInit, OnDestroy {
   user !: userDetail
+  subscription : any
 
-  constructor(private loginService: LoginService , private authorityService : AuthorityService) {}
+  constructor(private loginService: LoginService , private authorityService : AuthorityService , private router : Router) {
+  }
 
   ngOnInit(): void {
-    this.loginService.userDetail.subscribe(res => {
+   this.subscription =  this.loginService.userDetail.subscribe(res => {
       this.user = res
     })
   }
@@ -56,7 +59,7 @@ export class AuthorityComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.loginService.userDetail.unsubscribe()
+   this.subscription.unsubscribe()
   }
 
 }
