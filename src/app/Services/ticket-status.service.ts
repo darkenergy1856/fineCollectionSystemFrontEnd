@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment.prod';
 import { Ticket } from '../Entity/ticket';
@@ -11,10 +11,14 @@ export class TicketStatusService {
   constructor(private httpClient : HttpClient) { }
 
   getTicketStatus(ticketId : string){
-    return this.httpClient.get<Ticket>(environment.baseUrl + "ticketService/getTicket?ticketId=" + ticketId)
+    let headers = new HttpHeaders();
+    headers = headers.set('skipAuth', 'true')
+    return this.httpClient.get<Ticket>(environment.baseUrl + "ticketService/getTicket?ticketId=" + ticketId , {'headers': headers})
   }
 
   payTicket(ticketId :  string){
-    return this.httpClient.post(environment.baseUrl + "ticketService/updateTicket?ticketId=" + ticketId , '' , {responseType : 'text'})
+    let headers = new HttpHeaders();
+    headers = headers.set('skipAuth', 'true')
+    return this.httpClient.post(environment.baseUrl + "ticketService/updateTicket?ticketId=" + ticketId , '' , {responseType : 'text','headers' : headers})
   }
 }

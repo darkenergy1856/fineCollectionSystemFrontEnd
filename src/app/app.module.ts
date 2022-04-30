@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -16,6 +16,7 @@ import { authGuardAdmin } from './Services/authGuardAdmin.service';
 import { TicketStatusComponent } from './ticket-status/ticket-status.component';
 import { WildRouteComponent } from './wild-route/wild-route.component';
 import {MatIconModule} from '@angular/material/icon';
+import { InterceptService } from './Services/intercept.service';
 
 
 const appRoutes: Routes = [
@@ -47,7 +48,9 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     MatIconModule,
   ],
-  providers: [],
+  providers: [{provide : HTTP_INTERCEPTORS , 
+    useClass:InterceptService , 
+    multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
